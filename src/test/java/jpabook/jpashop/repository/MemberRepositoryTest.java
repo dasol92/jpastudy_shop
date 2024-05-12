@@ -1,6 +1,6 @@
 package jpabook.jpashop.repository;
 
-import jpabook.jpashop.entity.Member;
+import jpabook.jpashop.domain.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +17,7 @@ class MemberRepositoryTest {
     @Test
     @Transactional
     @Rollback(value = false)
-    public void testMember() throws Exception {
+    void testMember() throws Exception {
         //given
         Member member = new Member();
         member.setUsername("MemberA");
