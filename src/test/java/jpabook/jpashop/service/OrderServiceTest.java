@@ -87,7 +87,9 @@ class OrderServiceTest {
     private Member createMember() {
         Member member = new Member();
         member.setName("홍길동");
-        member.setAddress(new Address("서울", "한강", "12345"));
+        member.setAddress(Address.builder()
+                .city("서울").street("한강").zipcode("12345")
+                .build());
         em.persist(member);
         return member;
     }
