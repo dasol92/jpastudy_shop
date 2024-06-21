@@ -92,4 +92,13 @@ public class Order {
         return totalPrice;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", orderItems=" + orderItems +
+                ", orderDate=" + orderDate +
+                ", status=" + status +
+                '}';
+    }
 }

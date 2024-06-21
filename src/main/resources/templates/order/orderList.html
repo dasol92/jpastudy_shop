@@ -6,34 +6,23 @@
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <div>
         <div>
-            <form
-                    class="form-inline" th:object="${orderSearch}">
-                <div
-                        class="form-group mb-2">
-                    <input
-                            class="form
-control" placeholder="회원명" th:field="*{memberName}" type="text"/>
+            <form class="form-inline" th:object="${orderSearch}">
+                <div class="form-group mb-2">
+                    <input class="form-control" placeholder="회원명" th:field="*{memberName}" type="text"/>
                 </div>
-                <div
-                        class="form-group mx-sm-1 mb-2">
-                    <select
-                            class="form-control" th:field="*{orderStatus}">
-                        <option
-                                value="">주문상태
-                        </option>
-                        <option
-                                th:each=
-                                        "status : ${T(jpabook.jpashop.domain.OrderStatus).values()}"
+                <div class="form-group mx-sm-1 mb-2">
+                    <select class="form-control" th:field="*{orderStatus}">
+                        <option value="">주문상태</option>
+                        <option th:each="status : ${T(jpabook.jpashop.domain.OrderStatus).values()}"
                                 th:text="${status}"
                                 th:value="${status}">option
                         </option>
                     </select>
                 </div>
-                <button
-                        class="btn btn-primary mb-2" type="submit">검색
-                </button>
+                <button class="btn btn-primary mb-2" type="submit">검색</button>
             </form>
         </div>
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -48,28 +37,18 @@ control" placeholder="회원명" th:field="*{memberName}" type="text"/>
             </tr>
             </thead>
             <tbody>
-            <tr
-                    th:each="item : ${orders}">
-                <td
-                        th:text="${item.id}"></td>
-                <td
-                <td
-                <td
-                <td
-                        th:text="${item.member.name}"></td>
-                th:text="${item.orderItems[0].item.name}"></td>
-                th:text="${item.orderItems[0].orderPrice}"></td>
-                th:text="${item.orderItems[0].count}"></td>
-                <td
-                <td
+            <tr th:each="item : ${orders}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.member.name}"></td>
+                <td th:text="${item.orderItems[0].item.name}"></td>
+                <td th:text="${item.orderItems[0].orderPrice}"></td>
+                <td th:text="${item.orderItems[0].count}"></td>
+                <td th:text="${item.status}"></td>
+                <td th:text="${item.orderDate}"></td>
                 <td>
-                    th:text="${item.status}">
-                </td>
-                th:text="${item.orderDate}"></td>
-                <a
-                        class="btn btn-danger" href="#"
-                        th:href="'javascript:cancel('+${item.id}+')'"
-                        th:if="${item.status.name() == 'ORDER'}">CANCEL</a>
+                    <a th:if="${item.status.name() == 'ORDER'}" href="#"
+                       th:href="'javascript:cancel('+${item.id}+')'" class="btn btn-danger">
+                        CANCEL</a>
                 </td>
             </tr>
             </tbody>
@@ -80,11 +59,11 @@ control" placeholder="회원명" th:field="*{memberName}" type="text"/>
 </body>
 <script>
     function cancel(id) {
-    var form = document.createElement("form");
-           form.setAttribute("method", "post");
-           form.setAttribute("action", "/orders/" + id + "/cancel");
-    document.body.appendChild(form);
-           form.submit();
-       }
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/orders/" + id + "/cancel");
+        document.body.appendChild(form);
+        form.submit();
+   }
 </script>
 </html>
